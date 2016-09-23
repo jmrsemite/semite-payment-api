@@ -1,0 +1,28 @@
+{
+  "name": "datatables-buttons",
+  "version": "1.1.0",
+  "license": "MIT",
+  "main": [
+    "js/dataTables.buttons.js",
+    "js/buttons.colVis.js",
+    "js/buttons.flash.js",
+    "js/buttons.html5.js",
+    "js/buttons.print.js",
+    "css/buttons.dataTables.scss"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7.0",
+    "datatables": ">=1.10.8"
+  },
+  "homepage": "https://github.com/DataTables/Buttons",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.0",
+    "commit": "81c8c83d56b7f6b0de6647f098dc4a3d92ffbbc0"
+  },
+  "_source": "git://github.com/DataTables/Buttons.git",
+  "_target": "~1.1.0",
+  "_originalSource": "datatables-buttons",
+  "_direct": true
+}

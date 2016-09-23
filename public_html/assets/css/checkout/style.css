@@ -1,0 +1,125 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900,700,500);
+body {
+  padding: 60px 0px;
+  background-color: #eef2f4;
+  margin: 0 auto;
+}
+.body-text {
+  padding-bottom: 30px;
+  font-family: "Roboto";
+  font-size: .9em;
+  color: #2b2b2b;
+}
+.form-container {
+  width: 100%;
+}
+.card-wrapper {
+  background-color: #6FB7E9;
+  width: 100%;
+  padding: 10px 0px;
+}
+.personal-information {
+  background-color: #3C8DC5;
+  color: #fff;
+  padding: 1px 0px;
+  text-align: center;
+}
+.text-center{
+    text-align: center;
+}
+form{
+
+    width: 400px;
+    margin: 0 auto;
+}
+.bottom-info{
+    width: 50%;
+    margin: 0 auto;
+    text-align: left;
+}
+h1 {
+  font-size: 1.3em;
+  font-family: "Roboto"
+}
+input {
+  margin: 1px 0px;
+}
+input[type="text"]{
+  display: block;
+  height: 40px;
+  width: 389px;
+  padding-left: 10px;
+  border: none;
+}
+input[type="email"]{
+  display: block;
+  height: 40px;
+  width: 389px;
+  padding-left: 10px;
+  border: none;
+}
+input[type="submit"]{
+  display: block;
+  height: 60px;
+  width: 400px;
+  border: none;
+  background-color: #3C8DC5;
+  color: #fff;
+  margin-top: 2px;
+  curson: pointer;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+input[type="submit"]:hover{
+  background-color: #6FB7E9;
+  transition: 0.3s ease;
+}
+#column-left {
+  width: 47.4%;
+  float: left;
+  margin-bottom: 2px;
+}
+#column-right {
+  width: 47%;
+  float: right;
+}
+
+@media only screen and (min-width: 300px) and (max-width: 400px){
+  .personal-information {
+    width: 300px;
+  }
+  .card-wrapper {
+    background-color: #6FB7E9;
+    width: 300px;
+    padding: 20px 0px;
+  }
+  h1 {
+    font-size: 1.2em;
+  }
+  #input-field {
+    width: 290px;
+  }
+  input[type="text"]{
+  height: 40px;
+  }
+  input[type="email"]{
+  height: 40px;
+  }
+  input[type="submit"]{
+  height: 50px;
+  }
+  #column-left {
+    width: 290px;
+    display: block;
+    float: none;
+  }
+  #column-right {
+    width: 290px;
+    display: block;
+    float: none;
+  }
+  #input-button {
+    width: 300px;
+  }
+}

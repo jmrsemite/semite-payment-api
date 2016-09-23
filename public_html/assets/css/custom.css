@@ -1,0 +1,32 @@
+/* Put your own CSS here */
+/***** DATA TABLES *****/
+.table.dataTable td.details-control {
+    cursor: pointer;
+    width: 2%;
+}
+.table.dataTable td.details-control:before {
+    font-family: 'FontAwesome';
+    content: '\f105';
+    display: block;
+    text-align: center;
+}
+.table.dataTable tr.shown td.details-control:before {
+    content: '\f107';
+}
+.table.dataTable tr.shown + tr > td {
+    padding: 20px;
+    background-color: #edeff2;
+}
+.table.dataTable tr.shown + tr > td h4 {
+    margin: 0 0 15px;
+}
+.table.dataTable tr.shown + tr > td h4 > small {
+    display: block;
+    font-size: 12px;
+    text-transform: none;
+    margin-top: 5px;
+    color: #82858e;
+}
+#logo > a img{
+    width : 140px;
+}

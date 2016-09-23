@@ -1,0 +1,53 @@
+{
+  "name": "datatables.net-buttons-dt",
+  "description": "Buttons for DataTables ",
+  "main": [
+    "css/buttons.dataTables.css"
+  ],
+  "keywords": [
+    "buttons",
+    "excel",
+    "pdf",
+    "csv",
+    "column visibility",
+    "print",
+    "DataTables",
+    "jQuery",
+    "table",
+    "DataTables"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7",
+    "datatables.net": ">=1.10.9",
+    "datatables.net-buttons": ">=1.0.3"
+  },
+  "moduleType": [
+    "globals",
+    "amd",
+    "node"
+  ],
+  "ignore": [
+    "composer.json",
+    "datatables.json",
+    "package.json"
+  ],
+  "authors": [
+    {
+      "name": "SpryMedia Ltd",
+      "homepage": "https://datatables.net"
+    }
+  ],
+  "homepage": "https://datatables.net",
+  "license": "MIT",
+  "version": "1.1.2",
+  "_release": "1.1.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.1.2",
+    "commit": "b99b3e78d6f00da35c4f1964ce907b405785e7da"
+  },
+  "_source": "git://github.com/DataTables/Dist-DataTables-Buttons-DataTables.git",
+  "_target": "~1.1.2",
+  "_originalSource": "datatables.net-buttons-dt",
+  "_direct": true
+}
