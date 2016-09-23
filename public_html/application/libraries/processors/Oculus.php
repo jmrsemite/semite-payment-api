@@ -20,7 +20,7 @@ class Oculus {
         $this->cc_validator = new CreditCardValidator();
     }
 
-    public function Charge($merchant,$clientData,$merchantProcessor,$creditCard,$amount,$params){
+    public function Charge($merchant,$clientData,$merchantProcessor,$creditCard,$amount,$baseCurrency,$trackingCode,$params){
 
         $processor_data = json_decode($merchantProcessor->processor_data);
 
@@ -69,7 +69,7 @@ class Oculus {
                 'Amount'=>(float)$amount,
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
-                'CountryCode'=>Translator::getCountryIsoFromId($params['countryId']),
+                'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
                 'CurrencyCode'=>$params['currencyId'],
                 'PurchaseCardTaxAmount'=>'0',
             )
