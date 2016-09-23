@@ -10,7 +10,8 @@ class Semite_Client
     protected $_ca_certificates_file = null;
 
 	protected $_processor_host = array(
-			'test' => 'http://processor.crm.io/',
+			'test' => 'http://sandbox.semitepayment.com/',
+            'live' => 'https://processor.semitepayment.com/',
 		);
 
 	public function __construct ($environment = self::ENV_LIVE)
