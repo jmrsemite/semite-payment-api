@@ -56,7 +56,7 @@ class Oculus {
                 'MCSAccountID'=>$processor_data->gateway_account_id,
             ),
             'TokenData'=>array(
-                'TokenType'=>'5',
+                'TokenType'=>'0',
                 'CardNumber'=>$creditCard['cardNumber'],
                 'CardType'=>Translator::getCardIdByIssuer($CardType),
                 'ExpirationMonth'=>$creditCard['cardExpiryMonth'],
@@ -70,10 +70,11 @@ class Oculus {
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
-                'CurrencyCode'=>$params['currencyId'],
+                'CurrencyCode'=>$baseCurrency,
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
+
 
         try
         {

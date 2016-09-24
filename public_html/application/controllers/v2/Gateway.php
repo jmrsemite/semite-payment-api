@@ -25,6 +25,7 @@ class Gateway extends CI_Controller {
 
     public function index()
     {
+
         // grab the request
         $request = trim(file_get_contents('php://input'));
 
@@ -150,7 +151,7 @@ class Gateway extends CI_Controller {
         }
 
         // Start processing request
-        $response =  $this->rest->Charge($merchant, $client,$merchantProcessor, $processedAmount,$amount, $creditCard, $params);
+        $response =  $this->rest->Charge($merchant, $client,$merchantProcessor, $amount,$processedAmount, $creditCard, $params);
 
         // Return processed result
         return $response;
