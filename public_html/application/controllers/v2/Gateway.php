@@ -96,20 +96,6 @@ class Gateway extends CI_Controller {
             die($this->response->Error(1002));
         }
 
-        //Initiate Fraud Prevention System
-        $this->load->library('rest/fraudlabspro','fraudlabspro');
-        $fraud = $this->fraudlabspro->_initiate($params);
-
-
-        // Reject transaction if score is higher then set
-
-        if (get_fraudlabs_value('score') < $fraud['fraud_score']){
-
-            die($this->response->Error(9000));
-        }
-
-        $params['fraud_trx_id'] = $fraud['fraud_trx_id'];
-        $params['fraud_score'] = $fraud['fraud_score'];
 
         $response = $this->$request_type($merchant,$client, $params);
 
@@ -127,6 +113,21 @@ class Gateway extends CI_Controller {
 
 
     public function Charge($merchant,$client,$params){
+
+        //Initiate Fraud Prevention System
+        $this->load->library('rest/fraudlabspro','fraudlabspro');
+        $fraud = $this->fraudlabspro->_initiate($params);
+
+
+        // Reject transaction if score is higher then set
+
+        if (get_fraudlabs_value('score') < $fraud['fraud_score']){
+
+            die($this->response->Error(9000));
+        }
+
+        $params['fraud_trx_id'] = $fraud['fraud_trx_id'];
+        $params['fraud_score'] = $fraud['fraud_score'];
 
         // take XML params and put them in variables
         $creditCard = isset($params['creditCard']) ? $params['creditCard'] : array();
@@ -160,6 +161,21 @@ class Gateway extends CI_Controller {
 
     public function Authorize($merchant,$client,$params){
 
+        //Initiate Fraud Prevention System
+        $this->load->library('rest/fraudlabspro','fraudlabspro');
+        $fraud = $this->fraudlabspro->_initiate($params);
+
+
+        // Reject transaction if score is higher then set
+
+        if (get_fraudlabs_value('score') < $fraud['fraud_score']){
+
+            die($this->response->Error(9000));
+        }
+
+        $params['fraud_trx_id'] = $fraud['fraud_trx_id'];
+        $params['fraud_score'] = $fraud['fraud_score'];
+
         // take XML params and put them in variables
         $creditCard = isset($params['creditCard']) ? $params['creditCard'] : array();
         $amount = $params['amount'];
@@ -173,17 +189,17 @@ class Gateway extends CI_Controller {
         $this->db->where('merchant_processor_id',$params['processor']);
         $merchantProcessor = $this->db->get('tblmerchantprocessors')->row();
 
-        if ($params['amount'] > $merchantProcessor->transactionLimit){
-            die($this->response->Error(1002));
-        }
-
         // check if merchant owns this credentials
         if ($merchantProcessor->merchant_processor_id != $params['processor'] || $merchant->row()->id != $merchantProcessor->merchant_id){
             die($this->response->Error(5017));
         }
 
+        if ($amount > $merchantProcessor->transactionLimit){
+            die($this->response->Error(1002));
+        }
+
         // Start processing request
-        $response =  $this->rest->Authorize($merchant, $client,$merchantProcessor, $processedAmount,$amount, $creditCard, $params);
+        $response =  $this->rest->Authorize($merchant, $client,$merchantProcessor, $amount,$processedAmount, $creditCard, $params);
 
         // Return processed result
         return $response;
@@ -231,73 +247,6 @@ class Gateway extends CI_Controller {
         return $response;
     }
 
-    public function Payment($merchant,$client,$params){
-
-        // take XML params and put them in variables
-        $creditCard = isset($params['creditCard']) ? $params['creditCard'] : array();
-        $amount = $params['amount'];
-        $processedAmount = isset($params['amount']) ? $this->currency->convert($params['amount'],Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)) : FALSE;
-
-        // As of version 1.984 we pass any additional parameters along
-        // to the charge method for the gateway to handle.
-        unset($params['creditCard'],  $params['amount'], $params['authentication']);
-
-        // Activate merchant processor
-        $this->db->where('merchant_processor_id',$params['processor']);
-        $merchantProcessor = $this->db->get('tblmerchantprocessors')->row();
-
-        if ($params['amount'] > $merchantProcessor->transactionLimit){
-            die($this->response->Error(1002));
-        }
-
-        // check if merchant owns this credentials
-        if ($merchantProcessor->merchant_processor_id != $params['processor'] || $merchant->row()->id != $merchantProcessor->merchant_id){
-            die($this->response->Error(5017));
-        }
-
-        $params['type'] = 'Authorize';
-
-        // Start processing request
-        $response =  $this->rest->Authorize($merchant, $client,$merchantProcessor, $processedAmount,$amount, $creditCard, $params);
-
-//        $authorize = $this->arraytoxml->toArray($response);
-
-        if ($response['response_code']){
-
-            // As of version 1.984 we pass any additional parameters along
-            // to the charge method for the gateway to handle.
-            unset($params['authentication']);
-
-            // Activate merchant processor
-            $this->db->where('merchant_processor_id',$params['processor']);
-            $merchantProcessor = $this->db->get('tblmerchantprocessors')->row();
-
-            // check if merchant owns this credentials
-            if ($merchantProcessor->merchant_processor_id != $params['processor'] || $merchant->row()->id != $merchantProcessor->merchant_id){
-                die($this->response->Error(5017));
-            }
-
-            unset($params['creditCard']);
-            unset($params['currencyId']);
-            unset($params['countryId']);
-            unset($params['amount']);
-            unset($params['dbaName']);
-            unset($params['dbaCity']);
-            unset($params['avsAddress']);
-            unset($params['avsZip']);
-
-            $params['transactionId'] = $response['TransactionId'];
-            $params['transactionGuid'] = $response['TransactionGuid'];
-            $params['trackingMemberCode'] = $response['TrackingMemberCode']. '-' . $response['TransactionId'];
-            $params['type'] = 'Capture';
-
-            $response =  $this->rest->Capture($merchant, $client,$merchantProcessor, $params);
-
-        }
-        // Return processed result
-        return $response;
-    }
-
     public function Refund($merchant,$client,$params){
 
         // As of version 1.984 we pass any additional parameters along
@@ -313,12 +262,16 @@ class Gateway extends CI_Controller {
             die($this->response->Error(5017));
         }
 
-        $amount = $params['amount'];
-
-        $response =  $this->rest->Refund($merchant, $client,$merchantProcessor,$amount, $params);
+        $response =  $this->rest->Refund($merchant, $client,$merchantProcessor, $params);
 
         return $response;
     }
+
+    public function Payment($merchant,$client,$params){
+
+        die($this->response->Error(1));
+    }
+
 
     public function Credit(){
 //Cash2Card

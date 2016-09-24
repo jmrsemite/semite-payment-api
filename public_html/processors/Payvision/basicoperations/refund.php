@@ -17,9 +17,7 @@ class Payvision_BasicOperations_Refund extends Payvision_Operation
 			'transactionGuid'       => array(
 					'required' => TRUE,
 				),
-			'amount'              => array(
-					'required' => TRUE,
-				),
+			'amount'              => array(),
 			'currencyId'          => array(
 					'required' => TRUE,
 				),

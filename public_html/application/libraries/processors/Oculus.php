@@ -31,6 +31,7 @@ class Oculus {
             $wsdl = 'https://test.oculusgateway.ge/api/api.asmx?WSDL';
         }
 
+
         $trace = true;
         $exceptions = false;
 
@@ -45,9 +46,9 @@ class Oculus {
         //Create Soap Header.
         $header = new SOAPHeader($namespace, 'AuthHeader', $headerbody);
 
-        $CardType = $this->cc_validator->validate($creditCard['cardNumber']);
+        $this->cc_validator->validate($creditCard['cardNumber']);
 
-
+        $cardInfo = $this->cc_validator->GetCardInfo();
 
         $xml_array['creditCardSale'] = array(
             'ServiceSecurity'=>array(
@@ -58,7 +59,7 @@ class Oculus {
             'TokenData'=>array(
                 'TokenType'=>'0',
                 'CardNumber'=>$creditCard['cardNumber'],
-                'CardType'=>Translator::getCardIdByIssuer($CardType),
+                'CardType'=>Translator::getCardIdByIssuer($cardInfo['type']),
                 'ExpirationMonth'=>$creditCard['cardExpiryMonth'],
                 'ExpirationYear'=>substr($creditCard['cardExpiryYear'], -2),
                 'CVV'=>$creditCard['cardCvv'],
@@ -66,15 +67,14 @@ class Oculus {
                 'CAVV'=>(isset($params['cavv']) && !empty($params['cavv']) ? $params['cavv'] : null),
             ),
             'TransactionData'=>array(
-                'Amount'=>(float)$amount,
+                'Amount'=>money_format($amount,2),
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
-                'CurrencyCode'=>$baseCurrency,
+                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
-
 
         try
         {
@@ -156,8 +156,8 @@ class Oculus {
                 'Amount'=>(float)$amount,
                 'MCSTransactionID'=>$authorization->authorization_code,
                 'GatewayID'=>'3',
-                'CountryCode'=>Translator::getCountryIsoFromId($params['countryId']),
-                'CurrencyCode'=>$params['currencyId'],
+                'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
+                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
                 'PurchaseCardTaxAmount'=>'0',
             )
         );

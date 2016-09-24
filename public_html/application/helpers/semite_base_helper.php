@@ -15,7 +15,7 @@ function shapeSpace_check_https($mode = 0) {
 
         return true;
     }
-    return false;
+    return true;
 }
 
 /* Add your own functions here */

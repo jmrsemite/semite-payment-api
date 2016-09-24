@@ -230,7 +230,7 @@ class Rest_model extends CI_Model
         // pass back some values
         $response['type'] = $params['type'];
         $response['TrackingMemberCode'] = $transactionData['trackingCode'];
-        $response['amount'] = money_format("%!^i", $amount);
+        $response['amount'] = money_format("%!^i", $originalAmount);
         $response['TransactionId']= $transaction_id;
         $response['TransactionGuid'] = $transaction_authorization_id;
         $response['TransactionDateTime'] = $objDateTime->format(DateTime::ISO8601);
@@ -409,7 +409,7 @@ class Rest_model extends CI_Model
         // pass back some values
         $response['type'] = $params['type'];
         $response['TrackingMemberCode'] = $transactionData['trackingCode'];
-        $response['amount'] = money_format("%!^i", $amount);
+        $response['amount'] = money_format("%!^i", $originalAmount);
         $response['TransactionId']= $transaction_id;
         $response['TransactionGuid'] = $transaction_authorization_id;
         $response['TransactionDateTime'] = $objDateTime->format(DateTime::ISO8601);
@@ -462,7 +462,7 @@ class Rest_model extends CI_Model
             die($this->response->Error(4004));
         }
 
-        $amount = $transaction->amount;
+        $amount = $transaction->processedAmount;
 
         $clientBaseCurrency = $this->currency->getNameById($client->default_currency);
 
@@ -477,6 +477,8 @@ class Rest_model extends CI_Model
         $tokenize = new Encryption($token);
 
         $transactionData = array(
+            'fraud_trx_id'=>$transaction->fraud_trx_id,
+            'fraud_score'=>$transaction->fraud_score,
             'descriptor'=>$transaction->descriptor,
             'refid'=>$transaction->transactionid,
             'userid'=>(int)$transaction->userid,
@@ -506,6 +508,11 @@ class Rest_model extends CI_Model
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
             'xid'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
             'additionalInfo'=>$transaction->additionalInfo,
+            'additionalInfo'=>0,
+            'acquirerCommission' =>0,
+            'processorCommission' => 0,
+            'rollbackAmount'=>0,
+
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -576,7 +583,7 @@ class Rest_model extends CI_Model
         $this->db->where('transactionid',$params['transactionId']);
         $transaction = $this->db->get('tbltransactions')->row();
 
-        if ($transaction && $transaction->voided){
+        if ($transaction && $transaction->captured){
             die($this->response->Error(4004));
         }
 
@@ -587,7 +594,7 @@ class Rest_model extends CI_Model
             die($this->response->Error(4004));
         }
 
-        $amount = $transaction->amount;
+        $amount = $transaction->processedAmount;
 
         $clientBaseCurrency = $this->currency->getNameById($client->default_currency);
 
@@ -602,6 +609,8 @@ class Rest_model extends CI_Model
         $tokenize = new Encryption($token);
 
         $transactionData = array(
+            'fraud_trx_id'=>$transaction->fraud_trx_id,
+            'fraud_score'=>$transaction->fraud_score,
             'descriptor'=>$transaction->descriptor,
             'refid'=>$transaction->transactionid,
             'userid'=>(int)$transaction->userid,
@@ -609,7 +618,7 @@ class Rest_model extends CI_Model
             'processorId'=>(int)$transaction->processorid,
             'cardMask'=>$transaction->cardMask,
             'cardType'=>$transaction->cardType,
-            'amount'=>(float)money_format("%!^i", $transaction->amount),
+            'amount'=>(float)$transaction->amount,
             'processedAmount'=>(float)$transaction->processedAmount,
             'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
@@ -631,6 +640,11 @@ class Rest_model extends CI_Model
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
             'xid'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
             'additionalInfo'=>$transaction->additionalInfo,
+            'additionalInfo'=>0,
+            'acquirerCommission' =>0,
+            'processorCommission' => 0,
+            'rollbackAmount'=>0,
+
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -667,9 +681,10 @@ class Rest_model extends CI_Model
 
         return $response;
 
+
     }
 
-    public function Refund($merchant, $client,$merchantProcessor, $amount,$params=null){
+    public function Refund($merchant, $client,$merchantProcessor,$params=null){
 
         /*
          * Get clients processor and validate if this processor
@@ -701,7 +716,7 @@ class Rest_model extends CI_Model
         $this->db->where('transactionid',$params['transactionId']);
         $transaction = $this->db->get('tbltransactions')->row();
 
-        if ($transaction && $transaction->refunded){
+        if ($transaction && $transaction->captured){
             die($this->response->Error(4004));
         }
 
@@ -712,7 +727,7 @@ class Rest_model extends CI_Model
             die($this->response->Error(4004));
         }
 
-        $amount = $params['amount'];
+        $amount = $transaction->processedAmount;
 
         $clientBaseCurrency = $this->currency->getNameById($client->default_currency);
 
@@ -727,6 +742,8 @@ class Rest_model extends CI_Model
         $tokenize = new Encryption($token);
 
         $transactionData = array(
+            'fraud_trx_id'=>$transaction->fraud_trx_id,
+            'fraud_score'=>$transaction->fraud_score,
             'descriptor'=>$transaction->descriptor,
             'refid'=>$transaction->transactionid,
             'userid'=>(int)$transaction->userid,
@@ -736,16 +753,16 @@ class Rest_model extends CI_Model
             'cardType'=>$transaction->cardType,
             'amount'=>(float)$transaction->amount,
             'processedAmount'=>(float)$transaction->processedAmount,
-            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)),
+            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
             'type'=>$params['type'],
             'trackingCode'=>$trackingCode,
-            'currencyId'=>$params['currencyId'],
-            'countryId'=>$params['countryId'],
-            'dbaName'=>(isset($params['dbaName']) ? $params['dbaName'] : null),
-            'dbaCity'=>(isset($params['dbaCity']) ? $params['dbaCity'] : null),
-            'avsAddress'=>(isset($params['avsAddress']) ? $params['avsAddress'] : null),
-            'avsZip'=>(isset($params['avsZip']) ? $params['avsZip'] : null),
+            'currencyId'=>$transaction->currencyId,
+            'countryId'=>$transaction->countryId,
+            'dbaName'=>$transaction->dbaName,
+            'dbaCity'=>$transaction->dbaCity,
+            'avsAddress'=>$transaction->avsAddress,
+            'avsZip'=>$transaction->avsZip,
             'token'=>$token,
             'charged'=>0,
             'authorized'=>0,
@@ -755,6 +772,12 @@ class Rest_model extends CI_Model
             'retrived'=>0,
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
             'xid'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
+            'additionalInfo'=>$transaction->additionalInfo,
+            'additionalInfo'=>0,
+            'acquirerCommission' =>0,
+            'processorCommission' => 0,
+            'rollbackAmount'=>0,
+
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -791,5 +814,7 @@ class Rest_model extends CI_Model
 
         return $response;
 
+
     }
+
 }
