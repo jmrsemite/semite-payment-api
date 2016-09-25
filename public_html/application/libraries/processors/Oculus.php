@@ -67,7 +67,7 @@ class Oculus {
                 'CAVV'=>(isset($params['cavv']) && !empty($params['cavv']) ? $params['cavv'] : null),
             ),
             'TransactionData'=>array(
-                'Amount'=>money_format($amount,2),
+                'Amount'=>(float)money_format("%!^i", $amount),
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),

@@ -17,7 +17,7 @@ class Gateway extends CI_Controller {
 
         $this->load->library('rest/arraytoxml','arraytoxml');
         $this->load->library('currency','currency');
-        $this->load->library('mpi/cardinal');
+        $this->load->library('mpi/endeavour');
 
         $this->response = new Response();
 
@@ -297,18 +297,12 @@ class Gateway extends CI_Controller {
 
         $objDateTime = new DateTime('NOW');
 
-        $Centinel = new Cardinal();
+        $Endeavour = new Endeavour();
 
-        $centinel_lookup_response = $Centinel->MPILookup($params);
+        $lookupResponse = $Endeavour->MPILookup($params);
 
-        return array(
-            'EnrollmentCode'=>$centinel_lookup_response['Centinel_Enrolled'],
-            'trackingMemberCode'=>$params['trackingMemberCode'],
-            'EnrollmentId'=>$centinel_lookup_response['Centinel_TransactionId'],
-            'IssuerUrl'=>$centinel_lookup_response['Centinel_ACSUrl'],
-            'PaymentAuthenticationRequest'=>$centinel_lookup_response['Centinel_Payload'],
-            'DateTime'=>$objDateTime->format(DateTime::ISO8601)
-        );
+        return $lookupResponse;
+
     }
 
     public function Authenticate(){
