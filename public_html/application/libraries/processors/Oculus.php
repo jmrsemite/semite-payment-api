@@ -153,7 +153,7 @@ class Oculus {
                 'MCSAccountID'=>$processor_data->gateway_account_id,
             ),
             'TransactionData'=>array(
-                'Amount'=>(float)$amount,
+                'Amount'=>(float)money_format("%!^i", $amount),
                 'MCSTransactionID'=>$authorization->authorization_code,
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
