@@ -67,7 +67,7 @@ class Oculus {
                 'CAVV'=>(isset($params['cavv']) && !empty($params['cavv']) ? $params['cavv'] : null),
             ),
             'TransactionData'=>array(
-                'Amount'=>(float)money_format("%!^i", $amount),
+                'Amount'=>money_format("%!^i", $amount),
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
@@ -75,6 +75,7 @@ class Oculus {
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
+
 
         try
         {
@@ -153,7 +154,7 @@ class Oculus {
                 'MCSAccountID'=>$processor_data->gateway_account_id,
             ),
             'TransactionData'=>array(
-                'Amount'=>(float)money_format("%!^i", $amount),
+                'Amount'=>money_format("%!^i", $amount),
                 'MCSTransactionID'=>$authorization->authorization_code,
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),

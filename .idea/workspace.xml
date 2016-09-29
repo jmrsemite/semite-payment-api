@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6eb4b91f-d706-435f-a6f3-54946bce57aa" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/application/controllers/v2/Gateway.php" afterPath="$PROJECT_DIR$/public_html/application/controllers/v2/Gateway.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/application/libraries/processors/Oculus.php" afterPath="$PROJECT_DIR$/public_html/application/libraries/processors/Oculus.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="api.crm.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,18 +27,7 @@
     <favorites_list name="api.crm.io" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Gateway.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public_html/application/controllers/v2/Gateway.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.541272" vertical-offset="1460" max-vertical-offset="6520">
-              <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -84,8 +74,8 @@
         <option value="$PROJECT_DIR$/public_html/application/config/autoload.php" />
         <option value="$PROJECT_DIR$/public_html/application/libraries/mpi/Endeavour.php" />
         <option value="$PROJECT_DIR$/public_html/application/models/Rest_model.php" />
-        <option value="$PROJECT_DIR$/public_html/application/libraries/processors/Oculus.php" />
         <option value="$PROJECT_DIR$/public_html/application/controllers/v2/Gateway.php" />
+        <option value="$PROJECT_DIR$/public_html/application/libraries/processors/Oculus.php" />
       </list>
     </option>
   </component>
@@ -191,7 +181,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -213,11 +203,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
+              <option name="myItemId" value="libraries" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="v2" />
+              <option name="myItemId" value="processors" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -285,10 +275,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1535" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22801302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22801302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -595,13 +585,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/application/helpers/credit_card_validator_helper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13396482" vertical-offset="6381" max-vertical-offset="7120">
-          <caret line="333" column="31" selection-start-line="333" selection-start-column="20" selection-end-line="333" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public_html/processors/Payvision/client.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65087956" vertical-offset="801" max-vertical-offset="2140">
@@ -656,6 +639,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34641406" vertical-offset="8884" max-vertical-offset="22520">
           <caret line="457" column="9" selection-start-line="457" selection-start-column="9" selection-end-line="457" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -673,17 +657,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/application/libraries/processors/Oculus.php">
+    <entry file="file://$PROJECT_DIR$/public_html/application/controllers/v2/Gateway.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0054127197" vertical-offset="3004" max-vertical-offset="9580">
-          <caret line="159" column="84" selection-start-line="159" selection-start-column="84" selection-end-line="159" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.7834912" vertical-offset="1281" max-vertical-offset="6520">
+          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public_html/application/controllers/v2/Gateway.php">
+    <entry file="file://$PROJECT_DIR$/public_html/application/helpers/credit_card_validator_helper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.541272" vertical-offset="1460" max-vertical-offset="6520">
-          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.22733423" vertical-offset="592" max-vertical-offset="7120">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public_html/application/libraries/processors/Oculus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51285523" vertical-offset="2561" max-vertical-offset="9600">
+          <caret line="156" column="26" selection-start-line="156" selection-start-column="26" selection-end-line="156" selection-end-column="26" />
           <folding />
         </state>
       </provider>
