@@ -312,7 +312,7 @@ class Gateway extends CI_Controller {
 
     protected function request_log($merchant,$params){
 
-        unset($params['creditCard']);
+//        unset($params['creditCard']);
 
         $requestData = array(
             'type'=>$params['type'],
