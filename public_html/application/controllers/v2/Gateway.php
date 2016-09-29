@@ -96,6 +96,8 @@ class Gateway extends CI_Controller {
             die($this->response->Error(1002));
         }
 
+        $this->request_log($merchant,$params);
+
 
         $response = $this->$request_type($merchant,$client, $params);
 
@@ -103,8 +105,6 @@ class Gateway extends CI_Controller {
         if ($response == FALSE) {
             die($this->response->Error(1009));
         }
-
-        $this->request_log($merchant,$params);
 
 
         // Echo the response
