@@ -19,6 +19,8 @@ class Gateway extends CI_Controller {
         $this->load->library('currency','currency');
         $this->load->library('mpi/endeavour');
 
+        $this->cc_validator = new CreditCardValidator();
+
         $this->response = new Response();
 
     }
@@ -312,7 +314,10 @@ class Gateway extends CI_Controller {
 
     protected function request_log($merchant,$params){
 
-//        unset($params['creditCard']);
+        $this->cc_validator->Validate($params['creditCard']['cardNumber']);
+        $card_info = $this->cc_validator->GetCardInfo();
+
+        $params['creditCard']['cardNumber'] = $card_info['substring'];
 
         $requestData = array(
             'type'=>$params['type'],
