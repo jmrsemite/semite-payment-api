@@ -65,8 +65,10 @@ class Gateway extends CI_Controller {
         }
 
         // Make sure it came from a secure connection if SSL is active
-        if (!shapeSpace_check_https($merchant->row()->live_mode)) {
-            die($this->response->Error(1010));
+        if ($merchant->row()->live_mode) {
+            if (!shapeSpace_check_https($merchant->row()->live_mode)) {
+                die($this->response->Error(1010));
+            }
         }
 
         // Get the request type
@@ -207,6 +209,52 @@ class Gateway extends CI_Controller {
         return $response;
     }
 
+    public function Payment($merchant,$client,$params){
+
+        //Initiate Fraud Prevention System
+        $this->load->library('rest/fraudlabspro','fraudlabspro');
+        $fraud = $this->fraudlabspro->_initiate($params);
+
+
+        // Reject transaction if score is higher then set
+
+        if (get_fraudlabs_value('score') < $fraud['fraud_score']){
+
+            die($this->response->Error(9000));
+        }
+
+        $params['fraud_trx_id'] = $fraud['fraud_trx_id'];
+        $params['fraud_score'] = $fraud['fraud_score'];
+
+        // take XML params and put them in variables
+        $creditCard = isset($params['creditCard']) ? $params['creditCard'] : array();
+        $amount = $params['amount'];
+        $processedAmount = isset($params['amount']) ? $this->currency->convert($params['amount'],Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)) : FALSE;
+
+        // As of version 1.984 we pass any additional parameters along
+        // to the charge method for the gateway to handle.
+        unset($params['creditCard'],  $params['amount'], $params['authentication']);
+
+        // Activate merchant processor
+        $this->db->where('merchant_processor_id',$params['processor']);
+        $merchantProcessor = $this->db->get('tblmerchantprocessors')->row();
+
+        // check if merchant owns this credentials
+        if ($merchantProcessor->merchant_processor_id != $params['processor'] || $merchant->row()->id != $merchantProcessor->merchant_id){
+            die($this->response->Error(5017));
+        }
+
+        if ($amount > $merchantProcessor->transactionLimit){
+            die($this->response->Error(1002));
+        }
+
+        // Start processing request
+        $response =  $this->rest->Charge($merchant, $client,$merchantProcessor, $amount,$processedAmount, $creditCard, $params);
+
+        // Return processed result
+        return $response;
+    }
+
 
     public function Capture($merchant,$client,$params){
 
@@ -269,11 +317,6 @@ class Gateway extends CI_Controller {
         return $response;
     }
 
-    public function Payment($merchant,$client,$params){
-
-        die($this->response->Error(1));
-    }
-
 
     public function Credit(){
 //Cash2Card
@@ -300,16 +343,15 @@ class Gateway extends CI_Controller {
         $objDateTime = new DateTime('NOW');
 
         $Endeavour = new Endeavour();
+        if ($merchant->row()->live_mode) {
+
+            $Endeavour->setMID($merchant->row()->threeds_mid);
+        }
 
         $lookupResponse = $Endeavour->MPILookup($params);
 
         return $lookupResponse;
 
-    }
-
-    public function Authenticate(){
-
-        die($this->response->Error(1));
     }
 
     protected function request_log($merchant,$params){

@@ -326,7 +326,80 @@ class Payvision {
         return $response;
 
     }
-    public function Payment(){}
+
+    public function Payment($merchant,$clientData,$merchantProcessor,$creditCard,$amount,$baseCurrency,$trackingCode,$params){
+
+        $processor_data = json_decode($merchantProcessor->processor_data);
+
+        try
+        {
+            if ($merchant->row()->live_mode){
+                $client = new Payvision_Client(Payvision_Client::ENV_LIVE);
+            } else {
+                $client = new Payvision_Client(Payvision_Client::ENV_TEST);
+            }
+
+            $payment = new Payvision_BasicOperations_Payment();
+            $payment->setMember($processor_data->memberId, $processor_data->memberGuid);
+            $payment->setCountryId($params['countryId']);
+
+            $payment->setCardNumberAndHolder($creditCard['cardNumber']);
+            $payment->setCardExpiry($creditCard['cardExpiryMonth'], $creditCard['cardExpiryYear']);
+            $payment->setCardValidationCode($creditCard['cardCvv']);
+
+            $payment->setXid($params['xid']);
+
+            if (isset($params['dbaName']) && !empty($params['dbaName'])){
+
+                $descriptor = $params['dbaName'].'|';
+
+            }
+
+            if (isset($params['dbaCity']) && !empty($params['dbaCity'])){
+
+                $descriptor .= $params['dbaCity'];
+            }
+
+            if (!empty($descriptor)){
+
+                $payment->setDynamicDescriptor($descriptor);
+            }
+
+            $payment->setAmountAndCurrencyId(money_format("%!^i", $amount), Payvision_Translator::getCurrencyIdFromIsoCode($baseCurrency));
+
+            $payment->setTrackingMemberCode($trackingCode);
+
+            $client->call($payment);
+
+            $result = array(
+                'result_state'=>$payment->getResultState(),
+                'result_code'=>$payment->getResultCode(),
+                'result_message'=>$payment->getResultMessage(),
+                'result_transaction_id'=>$payment->getResultTransactionId(),
+                'result_transaction_guid'=>$payment->getResultTransactionGuid(),
+                'result_transaction_date'=>$payment->getResultTransactionDateTime(),
+                'result_tracking_member_code'=>$payment->getResultTrackingMemberCode(),
+                'result_cdc_data'=>$payment->getResultCdcData()
+            );
+
+            if (!$payment->getResultCode()){
+                $response_array = array('chargeResult' => json_encode($result));
+                $response = $this->ci->response->TransactionResponse(1, $response_array);
+            } else {
+                $response_array = array('chargeResult' => json_encode($result),'reason' => $result['result_message']);
+                $response = $this->ci->response->TransactionResponse(2, $response_array);
+            }
+
+        }
+        catch (Payvision_Exception $e)
+        {
+            $response_array = array('reason' => $e->getMessage());
+            $response = $this->ci->response->TransactionResponse(2, $response_array);
+        }
+
+        return $response;
+
+    }
 }
 
 

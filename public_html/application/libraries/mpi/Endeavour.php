@@ -28,7 +28,7 @@ class Endeavour {
         $amount = $data['amount'] * 100;
         $expiry = substr($data['creditCard']['cardExpiryYear'], -2).$data['creditCard']['cardExpiryMonth'];
 
-        $endeavourClient->add('mid',$this->_mid);
+        $endeavourClient->add('mid',$this->getMID());
         $endeavourClient->add('name',(isset($data['creditCard']['cardholder'])) ? $data['creditCard']['cardholder'] : null);
         $endeavourClient->add('pan',$data['creditCard']['cardNumber']);
         $endeavourClient->add('expiry',$expiry);
@@ -55,6 +55,16 @@ class Endeavour {
             return $get_array;
         }
 
+    }
+
+    public function setMID($mid){
+
+        $this->_mid = $mid;
+    }
+
+    public function getMID(){
+
+        return $this->_mid;
     }
 
     public function MPIAuthenticate($data){

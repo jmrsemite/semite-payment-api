@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','semite_base','semite_commission','xml_value_prep','semite_translator','semite_utf8','credit_card_validator','semite_encryption');
+$autoload['helper'] = array('url','semite_base','semite_constant','semite_commission','xml_value_prep','semite_translator','semite_utf8','credit_card_validator','semite_encryption');
 
 /*
 | -------------------------------------------------------------------
