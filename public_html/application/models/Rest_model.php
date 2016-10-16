@@ -177,9 +177,9 @@ class Rest_model extends CI_Model
             'processorId'=>(int)$merchantProcessor->processor_id,
             'cardMask'=>$card_info['substring'],
             'cardType'=>$card_info['type'],
-            'amount'=>(float)money_format("%!^i", $originalAmount),
-            'processedAmount'=>(float)money_format("%!^i", $amount),
-            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)),
+            'amount'=>money_format("%!^i", $originalAmount),
+            'processedAmount'=>money_format("%!^i", $amount),
+            'conversionRate'=>$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
             'type'=>$params['type'],
             'trackingCode'=>$trackingCode,
@@ -356,9 +356,9 @@ class Rest_model extends CI_Model
             'processorId'=>(int)$merchantProcessor->processor_id,
             'cardMask'=>$card_info['substring'],
             'cardType'=>$card_info['type'],
-            'amount'=>(float)money_format("%!^i", $originalAmount),
-            'processedAmount'=>(float)money_format("%!^i", $amount),
-            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)),
+            'amount'=>money_format("%!^i", $originalAmount),
+            'processedAmount'=>money_format("%!^i", $amount),
+            'conversionRate'=>$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($params['currencyId'],true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
             'type'=>$params['type'],
             'trackingCode'=>$trackingCode,
@@ -487,8 +487,8 @@ class Rest_model extends CI_Model
             'cardMask'=>$transaction->cardMask,
             'cardType'=>$transaction->cardType,
             'amount'=>(float)$transaction->amount,
-            'processedAmount'=>(float)$transaction->processedAmount,
-            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
+            'processedAmount'=>$transaction->processedAmount,
+            'conversionRate'=>$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
             'type'=>$params['type'],
             'trackingCode'=>$trackingCode,
@@ -500,7 +500,7 @@ class Rest_model extends CI_Model
             'avsZip'=>$transaction->avsZip,
             'token'=>$token,
             'charged'=>0,
-            'authorized'=>0,
+            'authorized'=>1,
             'refunded'=>0,
             'voided'=>0,
             'captured'=>1,
@@ -508,14 +508,13 @@ class Rest_model extends CI_Model
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
             'xid'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
             'additionalInfo'=>$transaction->additionalInfo,
-            'additionalInfo'=>0,
-            'acquirerCommission' =>0,
-            'processorCommission' => 0,
-            'rollbackAmount'=>0,
-
+            'acquirerCommission' => get_br_commission_amount($amount,$merchantProcessor->buyRate),
+            'processorCommission' => get_sr_commission_amount($amount,$merchantProcessor->buyRate,$merchantProcessor->saleRate),
+            'rollbackAmount'=>get_rollback_amount($amount,$merchantProcessor->saleRate,$merchantProcessor->buyRate,$merchantProcessor->rollbackReserve),
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
+        $this->db->query("UPDATE tbltransactions SET captured = '1' ,refId = '".(int) $transaction->transactionid."' WHERE transactionid = '".(int) $transaction->transactionid."'");
 
         $this->db->insert('tbltransactions',$transactionData);
         $transaction_id = $this->db->insert_id();
@@ -619,8 +618,8 @@ class Rest_model extends CI_Model
             'cardMask'=>$transaction->cardMask,
             'cardType'=>$transaction->cardType,
             'amount'=>(float)$transaction->amount,
-            'processedAmount'=>(float)$transaction->processedAmount,
-            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
+            'processedAmount'=>$transaction->processedAmount,
+            'conversionRate'=>$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
             'type'=>$params['type'],
             'trackingCode'=>$trackingCode,
@@ -632,7 +631,7 @@ class Rest_model extends CI_Model
             'avsZip'=>$transaction->avsZip,
             'token'=>$token,
             'charged'=>0,
-            'authorized'=>0,
+            'authorized'=>1,
             'refunded'=>0,
             'voided'=>1,
             'captured'=>0,
@@ -644,10 +643,11 @@ class Rest_model extends CI_Model
             'acquirerCommission' =>0,
             'processorCommission' => 0,
             'rollbackAmount'=>0,
-
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
+
+        $this->db->query("UPDATE tbltransactions SET voided = '1' ,refId = '".(int) $transaction->transactionid."' WHERE transactionid = '".(int) $transaction->transactionid."'");
 
         $this->db->insert('tbltransactions',$transactionData);
         $transaction_id = $this->db->insert_id();
@@ -716,15 +716,15 @@ class Rest_model extends CI_Model
         $this->db->where('transactionid',$params['transactionId']);
         $transaction = $this->db->get('tbltransactions')->row();
 
-        if ($transaction && $transaction->captured){
-            die($this->response->Error(4004));
+        if ($transaction && $transaction->refunded){
+            die($this->response->Error(4002));
         }
 
         $this->db->where('transactionid',$params['transactionId']);
         $transactionAuthorization = $this->db->get('tbltransactionauthorization')->row();
 
         if (!$transactionAuthorization){
-            die($this->response->Error(4004));
+            die($this->response->Error(4002));
         }
 
         $amount = $transaction->processedAmount;
@@ -752,8 +752,8 @@ class Rest_model extends CI_Model
             'cardMask'=>$transaction->cardMask,
             'cardType'=>$transaction->cardType,
             'amount'=>(float)$transaction->amount,
-            'processedAmount'=>(float)$transaction->processedAmount,
-            'conversionRate'=>(float)$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
+            'processedAmount'=>$transaction->processedAmount,
+            'conversionRate'=>$this->currencies_model->refresh(Translator::getCurrencyIdFromIsoCode($transaction->currencyId,true),$this->currency->getNameById($client->default_currency)),
             'ip'=>$_SERVER['REMOTE_ADDR'],
             'type'=>$params['type'],
             'trackingCode'=>$trackingCode,
@@ -764,23 +764,30 @@ class Rest_model extends CI_Model
             'avsAddress'=>$transaction->avsAddress,
             'avsZip'=>$transaction->avsZip,
             'token'=>$token,
-            'charged'=>0,
-            'authorized'=>0,
+            'charged'=>$transaction->charged,
+            'authorized'=>$transaction->authorized,
             'refunded'=>1,
-            'voided'=>0,
-            'captured'=>0,
+            'voided'=>$transaction->voided,
+            'captured'=>$transaction->captured,
             'retrived'=>0,
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
             'xid'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
             'additionalInfo'=>$transaction->additionalInfo,
-            'additionalInfo'=>0,
             'acquirerCommission' =>0,
             'processorCommission' => 0,
             'rollbackAmount'=>0,
-
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
+
+        $this->db->query("UPDATE tbltransactions SET refunded = '1' ,refId = '".(int) $transaction->transactionid."' WHERE transactionid = '".(int) $transaction->transactionid."'");
+
+        $this->db->where('refId',$transaction->transactionid);
+        $refTRX = $this->db->get('tbltransactions')->row();
+
+        if ($refTRX) {
+            $this->db->query("UPDATE tbltransactions SET refunded = '1'  WHERE refId = '" . (int)$transaction->transactionid . "'");
+        }
 
         $this->db->insert('tbltransactions',$transactionData);
         $transaction_id = $this->db->insert_id();

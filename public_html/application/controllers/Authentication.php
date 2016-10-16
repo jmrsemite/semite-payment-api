@@ -87,14 +87,30 @@ class Authentication extends CI_Controller
             else
             {
                 curl_close($ch);
-                $response = $arrayToXml->toArray($res);
+
+                $xml = @simplexml_load_string($res);
+
+                if($xml) {
+                    $response = $arrayToXml->toArray($res);
+
+                } else {
+                    $resp = json_decode($res);
+                    $response['response_code'] = $resp->response_code;
+                    $response['TransactionId'] = $resp->TransactionId;
+                }
+
             }
+
+
 
         } else {
 
             $response['response_code'] = 2;
             $response['TransactionId'] = '3dsfail';
         }
+
+        $this->db->query("INSERT INTO tblresponsetest SET response = '".json_encode($res)."'");
+
 
 
         redirect('http://map.semitepayment.io/terminal/result/'.$response['response_code'].'/'.$response['TransactionId'].'/1');

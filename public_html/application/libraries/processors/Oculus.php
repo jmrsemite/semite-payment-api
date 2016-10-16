@@ -155,14 +155,13 @@ class Oculus {
             ),
             'TransactionData'=>array(
                 'Amount'=>money_format("%!^i", $amount),
-                'MCSTransactionID'=>$authorization->authorization_code,
+                'MCSTransactionID'=>$authorization->authorizationid,
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
                 'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
-
 
         try
         {
@@ -181,7 +180,7 @@ class Oculus {
                 'result_code'=>(!$code ? 1 : 2),
                 'result_message'=>$response->CreditCredit_SoapResult->Result->ResultDetail,
                 'result_transaction_id'=>$response->CreditCredit_SoapResult->MCSTransactionID,
-                'result_transaction_guid'=>$response->CreditCredit_SoapResult->ProcessorApprovalCode,
+                'result_transaction_guid'=>($response->CreditCredit_SoapResult->ProcessorApprovalCode ? $response->CreditCredit_SoapResult->ProcessorApprovalCode : $response->CreditCredit_SoapResult->ReferenceNumber),
                 'result_transaction_date'=>date('Y-m-d H:s:i'),
                 'result_tracking_member_code'=>$params['trackingMemberCode'],
                 'result_cdc_data'=>$response->CreditCredit_SoapResult
@@ -206,11 +205,11 @@ class Oculus {
         return $response;
     }
 
-    public function Authorize($client,$client_processor,$credit_card,$amount,$base_currency,$tracking_code,$params){
+    public function Authorize($merchant,$clientData,$merchantProcessor,$creditCard,$amount,$baseCurrency,$trackingCode,$params){
 
-        $processor_data = json_decode($client_processor->processor_data);
+        $processor_data = json_decode($merchantProcessor->processor_data);
 
-        if ($client->live_mode){
+        if ($merchant->row()->live_mode){
 
             $wsdl = 'https://prod.oculusgateway.ge/api/api.asmx?WSDL';
         } else {
@@ -231,7 +230,9 @@ class Oculus {
         //Create Soap Header.
         $header = new SOAPHeader($namespace, 'AuthHeader', $headerbody);
 
-        $CardType = $this->cc_validator->validate($credit_card['card_num']);
+        $this->cc_validator->validate($creditCard['cardNumber']);
+
+        $cardInfo = $this->cc_validator->GetCardInfo();
 
         $xml_array['creditCardAuth'] = array(
             'ServiceSecurity'=>array(
@@ -240,21 +241,21 @@ class Oculus {
                 'MCSAccountID'=>$processor_data->gateway_account_id,
             ),
             'TokenData'=>array(
-                'TokenType'=>'5',
-                'CardNumber'=>$credit_card['card_num'],
-                'CardType'=>Translator::getCardIdByIssuer($CardType),
-                'ExpirationMonth'=>$credit_card['exp_month'],
-                'ExpirationYear'=>substr($credit_card['exp_year'], -2),
-                'CVV'=>$credit_card['cvv'],
-                'XID'=>(isset($params['Xid']) && !empty($params['Xid']) ? $params['Xid'] : null),
-                'CAVV'=>(isset($params['Cavv']) && !empty($params['Cavv']) ? $params['Cavv'] : null),
+                'TokenType'=>'0',
+                'CardNumber'=>$creditCard['cardNumber'],
+                'CardType'=>Translator::getCardIdByIssuer($cardInfo['type']),
+                'ExpirationMonth'=>$creditCard['cardExpiryMonth'],
+                'ExpirationYear'=>substr($creditCard['cardExpiryYear'], -2),
+                'CVV'=>$creditCard['cardCvv'],
+                'XID'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
+                'CAVV'=>(isset($params['cavv']) && !empty($params['cavv']) ? $params['cavv'] : null),
             ),
             'TransactionData'=>array(
-                'Amount'=>format_money($amount),
+                'Amount'=>money_format("%!^i", $amount),
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
-                'CountryCode'=>$params['country_code'],
-                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($base_currency),
+                'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
+                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
@@ -271,6 +272,7 @@ class Oculus {
             /* Converty CB Response*/
             $code = $response->CreditAuth_SoapResult->Result->ResultCode;
 
+
             $result = array(
                 'result_state'=>$code,
                 'result_code'=>(!$code ? 1 : 2),
@@ -278,7 +280,7 @@ class Oculus {
                 'result_transaction_id'=>$response->CreditAuth_SoapResult->MCSTransactionID,
                 'result_transaction_guid'=>$response->CreditAuth_SoapResult->ProcessorApprovalCode,
                 'result_transaction_date'=>date('Y-m-d H:s:i'),
-                'result_tracking_member_code'=>$params['tracking_member_code'],
+                'result_tracking_member_code'=>$params['trackingMemberCode'],
                 'result_cdc_data'=>$response->CreditAuth_SoapResult
             );
 
@@ -303,19 +305,17 @@ class Oculus {
 
     }
 
-    public function Capture($client,$client_processor,$authorization,$transaction,$amount,$base_currency,$tracking_code,$params){
+    public function Capture($merchant,$clientData,$merchantProcessor,$authorization,$amount,$baseCurrency,$trackingCode,$params){
 
-        $processor_data = json_decode($client_processor->processor_data);
+        $processor_data = json_decode($merchantProcessor->processor_data);
 
-        if ($client->live_mode){
+        if ($merchant->row()->live_mode){
 
             $wsdl = 'https://prod.oculusgateway.ge/api/api.asmx?WSDL';
         } else {
             $wsdl = 'https://test.oculusgateway.ge/api/api.asmx?WSDL';
         }
 
-
-        $processor_params = unserialize($client_processor->processor_data);
 
         $trace = true;
         $exceptions = false;
@@ -338,16 +338,14 @@ class Oculus {
                 'MCSAccountID'=>$processor_data->gateway_account_id,
             ),
             'TransactionData'=>array(
-                'Amount'=>format_money($transaction->processed_amount),
-                'MCSTransactionID'=>$authorization->authorization_id,
+                'Amount'=>money_format("%!^i", $amount),
+                'MCSTransactionID'=>$authorization->authorizationid,
                 'GatewayID'=>'3',
-                'CountryCode'=>$transaction->country_code,
-                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($transaction->currency_code),
+                'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
+                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
-
-
 
         try
         {
@@ -366,9 +364,9 @@ class Oculus {
                 'result_code'=>(!$code ? 1 : 2),
                 'result_message'=>$response->CreditCapture_SoapResult->Result->ResultDetail,
                 'result_transaction_id'=>$response->CreditCapture_SoapResult->MCSTransactionID,
-                'result_transaction_guid'=>$response->CreditCapture_SoapResult->ProcessorApprovalCode,
+                'result_transaction_guid'=>($response->CreditCapture_SoapResult->ProcessorApprovalCode ? $response->CreditCapture_SoapResult->ProcessorApprovalCode : $response->CreditCapture_SoapResult->ReferenceNumber),
                 'result_transaction_date'=>date('Y-m-d H:s:i'),
-                'result_tracking_member_code'=>$params['tracking_member_code'],
+                'result_tracking_member_code'=>$params['trackingMemberCode'],
                 'result_cdc_data'=>$response->CreditCapture_SoapResult
             );
 
@@ -391,19 +389,18 @@ class Oculus {
         return $response;
     }
 
-    public function Void($client,$client_processor,$authorization,$transaction,$amount,$base_currency,$tracking_code,$params){
 
-        $processor_data = json_decode($client_processor->processor_data);
+    public function Void($merchant,$clientData,$merchantProcessor,$authorization,$amount,$baseCurrency,$trackingCode,$params){
 
-        if ($client->live_mode){
+        $processor_data = json_decode($merchantProcessor->processor_data);
+
+        if ($merchant->row()->live_mode){
 
             $wsdl = 'https://prod.oculusgateway.ge/api/api.asmx?WSDL';
         } else {
             $wsdl = 'https://test.oculusgateway.ge/api/api.asmx?WSDL';
         }
 
-
-        $processor_params = unserialize($client_processor->processor_data);
 
         $trace = true;
         $exceptions = false;
@@ -426,16 +423,14 @@ class Oculus {
                 'MCSAccountID'=>$processor_data->gateway_account_id,
             ),
             'TransactionData'=>array(
-                'Amount'=>format_money($transaction->processed_amount),
-                'MCSTransactionID'=>$authorization->authorization_id,
+                'Amount'=>money_format("%!^i", $amount),
+                'MCSTransactionID'=>$authorization->authorizationid,
                 'GatewayID'=>'3',
-                'CountryCode'=>$transaction->country_code,
-                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($transaction->currency_code),
+                'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
+                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
-
-
 
         try
         {
@@ -454,9 +449,9 @@ class Oculus {
                 'result_code'=>(!$code ? 1 : 2),
                 'result_message'=>$response->CreditVoid_SoapResult->Result->ResultDetail,
                 'result_transaction_id'=>$response->CreditVoid_SoapResult->MCSTransactionID,
-                'result_transaction_guid'=>$response->CreditVoid_SoapResult->ProcessorApprovalCode,
+                'result_transaction_guid'=>($response->CreditVoid_SoapResult->ProcessorApprovalCode ? $response->CreditVoid_SoapResult->ProcessorApprovalCode : $response->CreditVoid_SoapResult->ReferenceNumber),
                 'result_transaction_date'=>date('Y-m-d H:s:i'),
-                'result_tracking_member_code'=>$params['tracking_member_code'],
+                'result_tracking_member_code'=>$params['trackingMemberCode'],
                 'result_cdc_data'=>$response->CreditVoid_SoapResult
             );
 
@@ -477,6 +472,107 @@ class Oculus {
         }
 
         return $response;
+    }
+
+    public function Payment($merchant,$clientData,$merchantProcessor,$creditCard,$amount,$baseCurrency,$trackingCode,$params){
+
+        $processor_data = json_decode($merchantProcessor->processor_data);
+
+        if ($merchant->row()->live_mode){
+
+            $wsdl = 'https://prod.oculusgateway.ge/api/api.asmx?WSDL';
+        } else {
+            $wsdl = 'https://test.oculusgateway.ge/api/api.asmx?WSDL';
+        }
+
+
+        $trace = true;
+        $exceptions = false;
+
+        $namespace = 'https://MyCardStorage.com/';
+
+        //Body of the Soap Header.
+        $headerbody = array(
+            'UserName' => $processor_data->gateway_username,
+            'Password' => $processor_data->gateway_password
+        );
+
+        //Create Soap Header.
+        $header = new SOAPHeader($namespace, 'AuthHeader', $headerbody);
+
+        $this->cc_validator->validate($creditCard['cardNumber']);
+
+        $cardInfo = $this->cc_validator->GetCardInfo();
+
+        $xml_array['creditCardSale'] = array(
+            'ServiceSecurity'=>array(
+                'ServiceUserName'=>$processor_data->gateway_service_username,
+                'ServicePassword'=>$processor_data->gateway_service_password,
+                'MCSAccountID'=>$processor_data->gateway_account_id,
+            ),
+            'TokenData'=>array(
+                'TokenType'=>'0',
+                'CardNumber'=>$creditCard['cardNumber'],
+                'CardType'=>Translator::getCardIdByIssuer($cardInfo['type']),
+                'ExpirationMonth'=>$creditCard['cardExpiryMonth'],
+                'ExpirationYear'=>substr($creditCard['cardExpiryYear'], -2),
+                'CVV'=>$creditCard['cardCvv'],
+                'XID'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
+                'CAVV'=>(isset($params['cavv']) && !empty($params['cavv']) ? $params['cavv'] : null),
+            ),
+            'TransactionData'=>array(
+                'Amount'=>money_format("%!^i", $amount),
+                'MCSTransactionID'=>'0',
+                'GatewayID'=>'3',
+                'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
+                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
+                'PurchaseCardTaxAmount'=>'0',
+            )
+        );
+
+
+        try
+        {
+            $client = new SoapClient($wsdl, array('trace' => $trace, 'exceptions' => $exceptions));
+
+            //set the Headers of Soap Client.
+            $client->__setSoapHeaders($header);
+            $response = $client->CreditSale_Soap($xml_array);
+
+
+            /* Converty CB Response*/
+            $code = $response->CreditSale_SoapResult->Result->ResultCode;
+
+            $result = array(
+                'result_state'=>$code,
+                'result_code'=>(!$code ? 1 : 2),
+                'result_message'=>$response->CreditSale_SoapResult->Result->ResultDetail,
+                'result_transaction_id'=>$response->CreditSale_SoapResult->MCSTransactionID,
+                'result_transaction_guid'=>$response->CreditSale_SoapResult->ProcessorApprovalCode,
+                'result_transaction_date'=>date('Y-m-d H:s:i'),
+                'result_tracking_member_code'=>$params['trackingMemberCode'],
+                'result_cdc_data'=>$response->CreditSale_SoapResult
+            );
+
+            if (!$code){
+                $response_array = array('chargeResult' => json_encode($result));
+                $response = $this->ci->response->TransactionResponse(1, $response_array);
+            } else {
+                $response_array = array('chargeResult' => json_encode($result),'reason' => $response->CreditSale_SoapResult->Result->ResultDetail);
+                $response = $this->ci->response->TransactionResponse(2, $response_array);
+
+            }
+        }
+
+        catch (Exception $e)
+        {
+
+            $response_array = array('reason' => $client->__getLastResponse());
+            $response = $this->ci->response->TransactionResponse(2, $response_array);
+        }
+
+        return $response;
+
     }
 }
 

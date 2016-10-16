@@ -102,6 +102,10 @@ class Gateway extends CI_Controller {
 
         $this->request_log($merchant,$params);
 
+        if ($params['amount'] == 0 || !is_numeric($params['amount'])){
+            die($this->response->Error(1009));
+        }
+
 
         $response = $this->$request_type($merchant,$client, $params);
 
@@ -356,10 +360,12 @@ class Gateway extends CI_Controller {
 
     protected function request_log($merchant,$params){
 
-        $this->cc_validator->Validate($params['creditCard']['cardNumber']);
-        $card_info = $this->cc_validator->GetCardInfo();
+        if (isset($params['creditCard']['cardNumber'])) {
+            $this->cc_validator->Validate($params['creditCard']['cardNumber']);
+            $card_info = $this->cc_validator->GetCardInfo();
 
-        $params['creditCard']['cardNumber'] = $card_info['substring'];
+            $params['creditCard']['cardNumber'] = $card_info['substring'];
+        }
 
         $requestData = array(
             'type'=>$params['type'],

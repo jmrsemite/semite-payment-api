@@ -44,7 +44,7 @@ class Payvision {
             $payment->setMember($processor_data->memberId, $processor_data->memberGuid);
             $payment->setCountryId($params['countryId']);
 
-            $payment->setCardNumberAndHolder($creditCard['cardNumber']);
+            $payment->setCardNumberAndHolder($creditCard['cardNumber'],(isset($creditCard['cardholder']) ? $creditCard['cardholder'] : null));
             $payment->setCardExpiry($creditCard['cardExpiryMonth'], $creditCard['cardExpiryYear']);
             $payment->setCardValidationCode($creditCard['cardCvv']);
 

@@ -54,3 +54,291 @@
 [Fri Oct 14 14:38:15.581666 2016] [:error] [pid 15220] [client 127.0.0.1:42478] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
 [Fri Oct 14 14:38:15.581676 2016] [:error] [pid 15220] [client 127.0.0.1:42478] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
 [Fri Oct 14 14:38:15.581686 2016] [:error] [pid 15220] [client 127.0.0.1:42478] PHP   5. Gateway->CheckEnrollment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:104
+[Sat Oct 15 17:06:22.579564 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP Fatal error:  require(): Failed opening required '/var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worlpayapi.php' (include_path='.:/usr/share/php') in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 9
+[Sat Oct 15 17:06:22.607236 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP Stack trace:
+[Sat Oct 15 17:06:22.607332 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:06:22.607345 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:06:22.607358 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:06:22.607371 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:06:22.607381 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:06:22.607393 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:06:22.607404 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   7. CI_Loader->library() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:84
+[Sat Oct 15 17:06:22.607414 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   8. CI_Loader->_ci_load_library() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:218
+[Sat Oct 15 17:06:22.607423 2016] [:error] [pid 17588] [client 127.0.0.1:36878] PHP   9. include_once() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:1086
+[Sat Oct 15 17:07:18.577225 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP Fatal error:  Class 'Connection' not found in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpayapi.php on line 25
+[Sat Oct 15 17:07:18.577272 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP Stack trace:
+[Sat Oct 15 17:07:18.577288 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:07:18.577299 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:07:18.577310 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:07:18.577349 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:07:18.577360 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:07:18.577384 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:07:18.577394 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   7. Worldpay->Charge() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:160
+[Sat Oct 15 17:07:18.577403 2016] [:error] [pid 15953] [client 127.0.0.1:36884] PHP   8. WorldpayAPI->__construct() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:22
+[Sat Oct 15 17:08:52.796410 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP Fatal error:  Class 'Order' not found in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpayapi.php on line 109
+[Sat Oct 15 17:08:52.796455 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP Stack trace:
+[Sat Oct 15 17:08:52.796475 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:08:52.796491 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:08:52.796509 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:08:52.796520 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:08:52.796530 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:08:52.796540 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:08:52.796549 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   7. Worldpay->Charge() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:160
+[Sat Oct 15 17:08:52.796559 2016] [:error] [pid 12569] [client 127.0.0.1:36910] PHP   8. WorldpayAPI->createOrder() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:43
+[Sat Oct 15 17:14:59.896939 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP Fatal error:  require(): Failed opening required '/var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/classes/autoload.php' (include_path='.:/usr/share/php') in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpayapi.php on line 7
+[Sat Oct 15 17:14:59.897122 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP Stack trace:
+[Sat Oct 15 17:14:59.897165 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:14:59.897186 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:14:59.897207 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:14:59.897254 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:14:59.897267 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:14:59.897279 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:14:59.897289 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   7. CI_Loader->library() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:84
+[Sat Oct 15 17:14:59.897300 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   8. CI_Loader->_ci_load_library() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:218
+[Sat Oct 15 17:14:59.897309 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP   9. include_once() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:1086
+[Sat Oct 15 17:14:59.897319 2016] [:error] [pid 12569] [client 127.0.0.1:36974] PHP  10. require() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:9
+[Sat Oct 15 17:15:17.127353 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP Fatal error:  require(): Failed opening required '/var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpay.php' (include_path='.:/usr/share/php') in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/init.php on line 20
+[Sat Oct 15 17:15:17.127509 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP Stack trace:
+[Sat Oct 15 17:15:17.127553 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:15:17.127573 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:15:17.127592 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:15:17.127611 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:15:17.127627 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:15:17.127644 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:15:17.127655 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   7. CI_Loader->library() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:84
+[Sat Oct 15 17:15:17.127667 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   8. CI_Loader->_ci_load_library() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:218
+[Sat Oct 15 17:15:17.127676 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP   9. include_once() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:1086
+[Sat Oct 15 17:15:17.127687 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP  10. require() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:9
+[Sat Oct 15 17:15:17.127696 2016] [:error] [pid 14415] [client 127.0.0.1:36980] PHP  11. require() /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpayapi.php:7
+[Sat Oct 15 17:16:13.210572 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP Fatal error:  require(): Failed opening required '/var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpay.php' (include_path='.:/usr/share/php') in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/init.php on line 20
+[Sat Oct 15 17:16:13.210691 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP Stack trace:
+[Sat Oct 15 17:16:13.210723 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:16:13.210741 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:16:13.210759 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:16:13.210780 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:16:13.210798 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:16:13.210816 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:16:13.210836 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   7. CI_Loader->library() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:84
+[Sat Oct 15 17:16:13.210852 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   8. CI_Loader->_ci_load_library() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:218
+[Sat Oct 15 17:16:13.210867 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP   9. include_once() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:1086
+[Sat Oct 15 17:16:13.210884 2016] [:error] [pid 16309] [client 127.0.0.1:37000] PHP  10. require() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:9
+[Sat Oct 15 17:16:30.386476 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP Fatal error:  Class 'Connection' not found in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpayapi.php on line 26
+[Sat Oct 15 17:16:30.386528 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP Stack trace:
+[Sat Oct 15 17:16:30.386543 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:16:30.386554 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:16:30.386565 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:16:30.386575 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:16:30.386585 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:16:30.386595 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:16:30.386620 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   7. Worldpay->Charge() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:160
+[Sat Oct 15 17:16:30.386631 2016] [:error] [pid 16201] [client 127.0.0.1:37004] PHP   8. WorldpayAPI->__construct() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:22
+[Sat Oct 15 17:17:23.297433 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP Fatal error:  Class 'Connection' not found in /var/www/html/processor.semitepayment.com/public_html/processors/Worldpay/Worldpayapi.php on line 26
+[Sat Oct 15 17:17:23.297491 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP Stack trace:
+[Sat Oct 15 17:17:23.297512 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 17:17:23.297528 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 17:17:23.297541 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:17:23.297552 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 17:17:23.297562 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   5. Gateway->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 17:17:23.297571 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:159
+[Sat Oct 15 17:17:23.297580 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   7. Worldpay->Charge() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:160
+[Sat Oct 15 17:17:23.297590 2016] [:error] [pid 17588] [client 127.0.0.1:37022] PHP   8. WorldpayAPI->__construct() /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php:22
+[Sat Oct 15 21:08:35.835090 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sat Oct 15 21:08:35.868707 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP Stack trace:
+[Sat Oct 15 21:08:35.868744 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sat Oct 15 21:08:35.868758 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sat Oct 15 21:08:35.868770 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 21:08:35.868782 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sat Oct 15 21:08:35.868792 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sat Oct 15 21:08:35.868802 2016] [:error] [pid 26009] [client 127.0.0.1:39806] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 11:59:16.984227 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 11:59:16.998893 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP Stack trace:
+[Sun Oct 16 11:59:16.998931 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 11:59:16.998943 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 11:59:16.998955 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 11:59:16.998967 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 11:59:16.998998 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 11:59:16.999011 2016] [:error] [pid 3976] [client 127.0.0.1:45110] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 11:59:45.108178 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 11:59:45.108335 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP Stack trace:
+[Sun Oct 16 11:59:45.108370 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 11:59:45.108391 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 11:59:45.108415 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 11:59:45.108439 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 11:59:45.108460 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 11:59:45.108481 2016] [:error] [pid 1446] [client 127.0.0.1:45124] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 11:59:59.155558 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 11:59:59.155614 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP Stack trace:
+[Sun Oct 16 11:59:59.155631 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 11:59:59.155643 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 11:59:59.155655 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 11:59:59.155668 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 11:59:59.155702 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 11:59:59.155714 2016] [:error] [pid 1448] [client 127.0.0.1:45140] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 12:03:29.862242 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 12:03:29.862314 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP Stack trace:
+[Sun Oct 16 12:03:29.862344 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 12:03:29.862368 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 12:03:29.862385 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 12:03:29.862401 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 12:03:29.862416 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 12:03:29.862431 2016] [:error] [pid 1448] [client 127.0.0.1:45170] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 14:49:32.534198 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP Fatal error:  Cannot use object of type stdClass as array in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Oculus.php on line 233
+[Sun Oct 16 14:49:32.534317 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP Stack trace:
+[Sun Oct 16 14:49:32.534356 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 14:49:32.534373 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 14:49:32.534388 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 14:49:32.534402 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 14:49:32.534416 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   5. Gateway->Authorize() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 14:49:32.534429 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   6. Rest_model->Authorize() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:206
+[Sun Oct 16 14:49:32.534448 2016] [:error] [pid 6294] [client 127.0.0.1:47282] PHP   7. Oculus->Authorize() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:339
+[Sun Oct 16 18:15:57.576744 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:15:57.576816 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP Stack trace:
+[Sun Oct 16 18:15:57.576837 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:15:57.576853 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:15:57.576869 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:15:57.576885 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:15:57.576919 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:15:57.576935 2016] [:error] [pid 15308] [client 127.0.0.1:49062] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:21:13.011669 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:21:13.011718 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP Stack trace:
+[Sun Oct 16 18:21:13.011733 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:21:13.011743 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:21:13.011755 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:21:13.011766 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:21:13.011776 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:21:13.011786 2016] [:error] [pid 15924] [client 127.0.0.1:49132] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:26:35.009954 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:26:35.010011 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP Stack trace:
+[Sun Oct 16 18:26:35.010030 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:26:35.010049 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:26:35.010061 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:26:35.010072 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:26:35.010082 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:26:35.010114 2016] [:error] [pid 15308] [client 127.0.0.1:49162] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:32:17.941350 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:32:17.941406 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP Stack trace:
+[Sun Oct 16 18:32:17.941427 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:32:17.941443 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:32:17.941460 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:32:17.941482 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:32:17.941499 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:32:17.941530 2016] [:error] [pid 15308] [client 127.0.0.1:49246] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:33:39.670945 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:33:39.671114 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP Stack trace:
+[Sun Oct 16 18:33:39.671190 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:33:39.671255 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:33:39.671323 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:33:39.671392 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:33:39.671455 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:33:39.671521 2016] [:error] [pid 15277] [client 127.0.0.1:49272] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:35:02.631694 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:35:02.631752 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP Stack trace:
+[Sun Oct 16 18:35:02.631775 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:35:02.631795 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:35:02.631833 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:35:02.631853 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:35:02.631872 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:35:02.631895 2016] [:error] [pid 15882] [client 127.0.0.1:49292] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:36:05.253193 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:36:05.253271 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP Stack trace:
+[Sun Oct 16 18:36:05.253297 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:36:05.253314 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:36:05.253333 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:36:05.253352 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:36:05.253369 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:36:05.253385 2016] [:error] [pid 15308] [client 127.0.0.1:49310] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 18:36:38.568510 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP Fatal error:  Call to undefined method Oculus::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 18:36:38.568653 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP Stack trace:
+[Sun Oct 16 18:36:38.568707 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 18:36:38.568737 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 18:36:38.568768 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:36:38.568803 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 18:36:38.568828 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 18:36:38.568849 2016] [:error] [pid 15846] [client 127.0.0.1:49328] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 20:17:04.015759 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP Fatal error:  Cannot use object of type DateTime as array in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 172
+[Sun Oct 16 20:17:04.026482 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP Stack trace:
+[Sun Oct 16 20:17:04.026579 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 20:17:04.026608 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 20:17:04.026633 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 20:17:04.026646 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 20:17:04.026658 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   5. Gateway->Refund() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 20:17:04.026671 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   6. Rest_model->Refund() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:315
+[Sun Oct 16 20:17:04.026691 2016] [:error] [pid 19960] [client 127.0.0.1:50218] PHP   7. Worldpay->Refund() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:734
+[Sun Oct 16 20:20:09.055586 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP Fatal error:  Cannot use object of type DateTime as array in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 172
+[Sun Oct 16 20:20:09.055642 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP Stack trace:
+[Sun Oct 16 20:20:09.055663 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 20:20:09.055680 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 20:20:09.055698 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 20:20:09.055715 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 20:20:09.055734 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   5. Gateway->Refund() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 20:20:09.055755 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   6. Rest_model->Refund() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:315
+[Sun Oct 16 20:20:09.055773 2016] [:error] [pid 21757] [client 127.0.0.1:50320] PHP   7. Worldpay->Refund() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:734
+[Sun Oct 16 21:11:00.425025 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP Fatal error:  Call to undefined method WorldpayAPI::captureAuthorisedOrder() in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 209
+[Sun Oct 16 21:11:00.437735 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP Stack trace:
+[Sun Oct 16 21:11:00.437897 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:11:00.438057 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:11:00.438110 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:11:00.438164 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:11:00.438213 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   5. Gateway->Capture() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:11:00.438256 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   6. Rest_model->Capture() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:275
+[Sun Oct 16 21:11:00.438298 2016] [:error] [pid 25339] [client 127.0.0.1:51204] PHP   7. Worldpay->Capture() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:469
+[Sun Oct 16 21:11:59.563611 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP Fatal error:  Call to undefined method WorldpayAPI::captureAuthorisedOrder() in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 209
+[Sun Oct 16 21:11:59.563772 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP Stack trace:
+[Sun Oct 16 21:11:59.563805 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:11:59.563825 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:11:59.563844 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:11:59.563894 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:11:59.563939 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   5. Gateway->Capture() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:11:59.563981 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   6. Rest_model->Capture() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:275
+[Sun Oct 16 21:11:59.564023 2016] [:error] [pid 23790] [client 127.0.0.1:51234] PHP   7. Worldpay->Capture() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:469
+[Sun Oct 16 21:12:31.848577 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP Fatal error:  Call to undefined method WorldpayAPI::captureAuthorisedOrder() in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 209
+[Sun Oct 16 21:12:31.848625 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP Stack trace:
+[Sun Oct 16 21:12:31.848641 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:12:31.848653 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:12:31.848664 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:12:31.848676 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:12:31.848699 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   5. Gateway->Capture() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:12:31.848715 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   6. Rest_model->Capture() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:275
+[Sun Oct 16 21:12:31.848732 2016] [:error] [pid 20182] [client 127.0.0.1:51244] PHP   7. Worldpay->Capture() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:469
+[Sun Oct 16 21:28:28.549510 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 21:28:28.549599 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP Stack trace:
+[Sun Oct 16 21:28:28.549623 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:28:28.549642 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:28:28.549659 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:28:28.549677 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:28:28.549695 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:28:28.549718 2016] [:error] [pid 25339] [client 127.0.0.1:51542] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 21:30:32.025155 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 21:30:32.025216 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP Stack trace:
+[Sun Oct 16 21:30:32.025239 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:30:32.025259 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:30:32.025278 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:30:32.025312 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:30:32.025331 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:30:32.025357 2016] [:error] [pid 19960] [client 127.0.0.1:51598] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 21:30:58.066147 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 21:30:58.066226 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP Stack trace:
+[Sun Oct 16 21:30:58.066251 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:30:58.066269 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:30:58.066289 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:30:58.066309 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:30:58.066341 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:30:58.066361 2016] [:error] [pid 22103] [client 127.0.0.1:51608] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 21:31:20.260110 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP Fatal error:  Call to undefined method Worldpay::Payment() in /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php on line 160
+[Sun Oct 16 21:31:20.260253 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP Stack trace:
+[Sun Oct 16 21:31:20.260283 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 21:31:20.260305 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 21:31:20.260328 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:31:20.260349 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 21:31:20.260368 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 21:31:20.260394 2016] [:error] [pid 21757] [client 127.0.0.1:51620] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 22:18:39.579798 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP Fatal error:  Cannot redeclare Worldpay::Charge() in /var/www/html/processor.semitepayment.com/public_html/application/libraries/processors/Worldpay.php on line 160
+[Sun Oct 16 22:18:39.596852 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP Stack trace:
+[Sun Oct 16 22:18:39.596909 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   1. {main}() /var/www/html/processor.semitepayment.com/public_html/index.php:0
+[Sun Oct 16 22:18:39.596926 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   2. require_once() /var/www/html/processor.semitepayment.com/public_html/index.php:315
+[Sun Oct 16 22:18:39.596942 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   3. call_user_func_array:{/var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514}() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 22:18:39.596966 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   4. Gateway->index() /var/www/html/processor.semitepayment.com/public_html/system/core/CodeIgniter.php:514
+[Sun Oct 16 22:18:39.599924 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   5. Gateway->Payment() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:106
+[Sun Oct 16 22:18:39.599944 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   6. Rest_model->Charge() /var/www/html/processor.semitepayment.com/public_html/application/controllers/v2/Gateway.php:252
+[Sun Oct 16 22:18:39.599974 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   7. CI_Loader->library() /var/www/html/processor.semitepayment.com/public_html/application/models/Rest_model.php:84
+[Sun Oct 16 22:18:39.599995 2016] [:error] [pid 19966] [client 127.0.0.1:52430] PHP   8. CI_Loader->_ci_load_library() /var/www/html/processor.semitepayment.com/public_html/system/core/Loader.php:218
