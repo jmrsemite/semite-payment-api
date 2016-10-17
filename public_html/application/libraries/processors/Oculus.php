@@ -71,7 +71,7 @@ class Oculus {
                 'MCSTransactionID'=>'0',
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
-                'CurrencyCode'=>'978',
+                'CurrencyCode'=>$params['currencyId'],
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
@@ -158,7 +158,7 @@ class Oculus {
                 'MCSTransactionID'=>$authorization->authorizationid,
                 'GatewayID'=>'3',
                 'CountryCode'=>Translator::getCountryIdFromIso($params['countryId'],true),
-                'CurrencyCode'=>Translator::getCurrencyIdFromIsoCode($baseCurrency),
+                'CurrencyCode'=>$params['currencyId'],
                 'PurchaseCardTaxAmount'=>'0',
             )
         );
