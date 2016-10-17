@@ -102,8 +102,10 @@ class Gateway extends CI_Controller {
 
         $this->request_log($merchant,$params);
 
-        if ($params['amount'] == 0 || !is_numeric($params['amount'])){
-            die($this->response->Error(1009));
+        if (isset($params['amount'])) {
+            if ($params['amount'] == 0 || !is_numeric($params['amount'])) {
+                die($this->response->Error(4005));
+            }
         }
 
 

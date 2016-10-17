@@ -145,6 +145,7 @@ class Response
             '4002' => 'This transaction has been already refunded.',
             '4003' => 'This transaction has been already captured.',
             '4004' => 'This transaction has been already voided.',
+            '4005' => 'Processing amount seems invalid.',
             '5000' => 'A valid Recurring ID is required.',
             '5001' => 'Start date cannot be in the past.',
             '5002' => 'End date cannot be in the past',

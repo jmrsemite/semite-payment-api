@@ -109,9 +109,6 @@ class Authentication extends CI_Controller
             $response['TransactionId'] = '3dsfail';
         }
 
-        $this->db->query("INSERT INTO tblresponsetest SET response = '".json_encode($res)."'");
-
-
 
         redirect('http://map.semitepayment.io/terminal/result/'.$response['response_code'].'/'.$response['TransactionId'].'/1');
     }

@@ -503,7 +503,7 @@ class Rest_model extends CI_Model
             'authorized'=>1,
             'refunded'=>0,
             'voided'=>0,
-            'captured'=>1,
+            'captured'=>($response['response_code'] == 1 ? 1 : 0),
             'retrived'=>0,
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
             'xid'=>(isset($params['xid']) && !empty($params['xid']) ? $params['xid'] : null),
@@ -514,8 +514,10 @@ class Rest_model extends CI_Model
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
-        $this->db->query("UPDATE tbltransactions SET captured = '1' ,refId = '".(int) $transaction->transactionid."' WHERE transactionid = '".(int) $transaction->transactionid."'");
 
+        if ($response['response_code'] == 1) {
+            $this->db->query("UPDATE tbltransactions SET captured = '1' ,refId = '" . (int)$transaction->transactionid . "' WHERE transactionid = '" . (int)$transaction->transactionid . "'");
+        }
         $this->db->insert('tbltransactions',$transactionData);
         $transaction_id = $this->db->insert_id();
 
@@ -633,7 +635,7 @@ class Rest_model extends CI_Model
             'charged'=>0,
             'authorized'=>1,
             'refunded'=>0,
-            'voided'=>1,
+            'voided'=>($response['response_code'] == 1 ? 1 : 0),
             'captured'=>0,
             'retrived'=>0,
             'enrolled'=>(isset($params['xid']) && !empty($params['xid']) ? 1 : 0),
@@ -647,8 +649,9 @@ class Rest_model extends CI_Model
             'date_added'=>date('Y-m-d H:s:i')
         );
 
-        $this->db->query("UPDATE tbltransactions SET voided = '1' ,refId = '".(int) $transaction->transactionid."' WHERE transactionid = '".(int) $transaction->transactionid."'");
-
+        if ($response['response_code'] == 1) {
+            $this->db->query("UPDATE tbltransactions SET voided = '1' ,refId = '" . (int)$transaction->transactionid . "' WHERE transactionid = '" . (int)$transaction->transactionid . "'");
+        }
         $this->db->insert('tbltransactions',$transactionData);
         $transaction_id = $this->db->insert_id();
 
@@ -766,7 +769,7 @@ class Rest_model extends CI_Model
             'token'=>$token,
             'charged'=>$transaction->charged,
             'authorized'=>$transaction->authorized,
-            'refunded'=>1,
+            'refunded'=>($response['response_code'] == 1 ? 1 : 0),
             'voided'=>$transaction->voided,
             'captured'=>$transaction->captured,
             'retrived'=>0,
@@ -780,13 +783,15 @@ class Rest_model extends CI_Model
             'date_added'=>date('Y-m-d H:s:i')
         );
 
-        $this->db->query("UPDATE tbltransactions SET refunded = '1' ,refId = '".(int) $transaction->transactionid."' WHERE transactionid = '".(int) $transaction->transactionid."'");
+        if ($response['response_code'] == 1) {
+            $this->db->query("UPDATE tbltransactions SET refunded = '1' ,refId = '" . (int)$transaction->transactionid . "' WHERE transactionid = '" . (int)$transaction->transactionid . "'");
 
-        $this->db->where('refId',$transaction->transactionid);
-        $refTRX = $this->db->get('tbltransactions')->row();
+            $this->db->where('refId', $transaction->transactionid);
+            $refTRX = $this->db->get('tbltransactions')->row();
 
-        if ($refTRX) {
-            $this->db->query("UPDATE tbltransactions SET refunded = '1'  WHERE refId = '" . (int)$transaction->transactionid . "'");
+            if ($refTRX) {
+                $this->db->query("UPDATE tbltransactions SET refunded = '1'  WHERE refId = '" . (int)$transaction->transactionid . "'");
+            }
         }
 
         $this->db->insert('tbltransactions',$transactionData);
