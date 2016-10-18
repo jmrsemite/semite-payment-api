@@ -47,7 +47,7 @@ class Authentication extends CI_Controller
       <api_id>'.$merchant->api_id.'</api_id>
       <secret_key>'.$merchant->secret_key.'</secret_key>
    </authentication>
-   <type>Payment</type>
+   <type>'.$MD['type'].'</type>
    <processor>'.$merchant->default_processor.'</processor>
   <countryId>'.$MD['countryId'].'</countryId>
  <amount>'.$MD['amount'].'</amount>

@@ -202,6 +202,7 @@ class Rest_model extends CI_Model
             'acquirerCommission' => get_br_commission_amount($amount,$merchantProcessor->buyRate),
             'processorCommission' => get_sr_commission_amount($amount,$merchantProcessor->buyRate,$merchantProcessor->saleRate),
             'rollbackAmount'=>get_rollback_amount($amount,$merchantProcessor->saleRate,$merchantProcessor->buyRate,$merchantProcessor->rollbackReserve),
+            'transactionFee'=>$merchantProcessor->transactionFee,
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -381,6 +382,7 @@ class Rest_model extends CI_Model
             'acquirerCommission' => get_br_commission_amount($amount,$merchantProcessor->buyRate),
             'processorCommission' => get_sr_commission_amount($amount,$merchantProcessor->buyRate,$merchantProcessor->saleRate),
             'rollbackAmount'=>get_rollback_amount($amount,$merchantProcessor->saleRate,$merchantProcessor->buyRate,$merchantProcessor->rollbackReserve),
+            'transactionFee'=>$merchantProcessor->transactionFee,
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -511,6 +513,7 @@ class Rest_model extends CI_Model
             'acquirerCommission' => get_br_commission_amount($amount,$merchantProcessor->buyRate),
             'processorCommission' => get_sr_commission_amount($amount,$merchantProcessor->buyRate,$merchantProcessor->saleRate),
             'rollbackAmount'=>get_rollback_amount($amount,$merchantProcessor->saleRate,$merchantProcessor->buyRate,$merchantProcessor->rollbackReserve),
+            'transactionFee'=>$merchantProcessor->transactionFee,
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -645,6 +648,7 @@ class Rest_model extends CI_Model
             'acquirerCommission' =>0,
             'processorCommission' => 0,
             'rollbackAmount'=>0,
+            'transactionFee'=>$merchantProcessor->transactionFee,
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
@@ -779,6 +783,7 @@ class Rest_model extends CI_Model
             'acquirerCommission' =>0,
             'processorCommission' => 0,
             'rollbackAmount'=>0,
+            'transactionFee'=>$merchantProcessor->transactionFee,
             'status'=>$response['response_code'],
             'date_added'=>date('Y-m-d H:s:i')
         );
